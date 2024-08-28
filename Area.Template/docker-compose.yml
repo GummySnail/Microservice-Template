@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  area.template.api:
+    image: ${DOCKER_REGISTRY-}area.template.api
+    container_name: Area.Template.Api
+    build:
+      context: .
+      dockerfile: src\Area.Template.Api\Dockerfile
+    depends_on:
+      - area-template-db
+
+  area-template-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: Area.Template.Mssql
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'Passw0rd'
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: 'Developer' 
+      MSSQL_TCP_PORT: 1433
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./log:/var/opt/mssql/log
+      - ./secrets:/var/opt/mssql/secrets
+    ports:
+      - "1433:1433"

@@ -1,0 +1,15 @@
+@Area.Template.Api_HostAddress = https://localhost:5001
+
+GET {{Area.Template.Api_HostAddress}}/templates/2fc9f2a0-68a4-42f4-b9d3-7a7c38ee5345
+Accept: application/json
+
+###
+
+POST {{Area.Template.Api_HostAddress}}/templates/
+Content-Type: application/json
+
+{
+  "name": "Test item",
+  "description": "description string"
+}
+###
